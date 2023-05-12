@@ -1,0 +1,103 @@
+// interface IApolloSettingProps {
+//   children: JSX.Element
+// }
+// export default function ApolloSetting(props: IApolloSettingProps) {
+//   // const [accessToken, setAccessToken] = useRecoilState(accessTokenState)
+
+//   // const aaa = useRecoilValueLoadable(restoreAccessTokenLoadable)
+
+//   // ******** 프론트엔드 서버인지, 브라우저 서버인지 구분하는 법
+//   // **** 1번 프리렌더링 예제 - process.browser 방법
+//   // if (process.browser) {
+//   // window.alert('안녕하세요')
+//   // console.log('지금은 브라우저다!!!!!')
+//   // const result = localStorage.getItem('accessToeken')
+//   // console.log(result)
+//   // if (result) setAccessToken(result)
+//   // } else {
+//   // console.log('지금은 프론트엔드 서버다!!!!!(yarn dev로 실행시킨 프로그램 내부)')
+//   // const result = localStorage.getItem('accessToeken')
+//   // console.log(result)
+//   // if (result) setAccessToken(result)
+//   // }
+
+//   // **** 2번 프리렌더링 예제 - typeof window 방법
+//   // if (typeof window !== 'undefined') {
+//   // window.alert('안녕하세요')
+//   // console.log('지금은 브라우저다!!!!!')
+//   // const result = localStorage.getItem('accessToeken')
+//   // console.log(result)
+//   // if (result) setAccessToken(result)
+//   // } else {
+//   // console.log('지금은 프론트엔드 서버다!!!!!(yarn dev로 실행시킨 프로그램 내부)')
+//   // const result = localStorage.getItem('accessToeken')
+//   // console.log(result)
+//   // if (result) setAccessToken(result)
+//   // }
+
+//   // **** 3번 프리렌더링 무시 - useEffect 방법
+//   // useEffect(() => {
+//   //   // ** 1. 기존방식(refreshToken 이전)
+//   //   // console.log('지금은 브라우저다!!!!!')
+//   //   // const result = localStorage.getItem('accessToken')
+//   //   // console.log(result)
+//   //   // if (result) setAccessToken(result)
+
+//   //   // 2. 새로운방식(refreshToken 이후) - 새로고침 이후에도 토큰 유지할 수 있도록
+//   //   void aaa.toPromise().then(newAccessToken => {
+//   //     setAccessToken(newAccessToken ?? '')
+//   //   })
+//   // }, [])
+
+//   // // **** Apllo 관련 에러가 발생했을 경우
+//   // // graphQLErrors : graphQL 에러
+//   // // operation     : 실패한 쿼리 정보
+//   // // forward       : 재시도
+//   // const errorLink = onError(({ graphQLErrors, operation, forward }) => {
+//   //   // 1-1. 에러를 캐치
+//   //   if (typeof graphQLErrors !== 'undefined') {
+//   //     for (const err of graphQLErrors) {
+//   //       // 1-2. 해당 에러가 토큰만료 에러인지 체크 (UNAUTHENTICATED)
+//   //       if (err.extensions.code === 'UNAUTHENTICATED') {
+//   //         return fromPromise(
+//   //           // 2-1. refreshToken으로 accessToken을 재발급 받기
+//   //           getAccessToken().then(newAccessToken => {
+//   //             // 2-2. 재발급받은 accessToken 저장하기
+//   //             setAccessToken(newAccessToken ?? '')
+
+//   //             // 3-1. 재발급받은 accessToken으로 방금 실패한 쿼리의 정보를 수정하기
+//   //             operation.setContext({
+//   //               headers: {
+//   //                 ...operation.getContext().headers, // 만료된 토큰이 추가되어 있는 상태
+//   //                 Authorization: `Bearer ${newAccessToken}`, // 3-2. accessToken만 새걸로 바꿔치기
+//   //               },
+//   //             })
+//   //           }),
+//   //         ).flatMap(() => forward(operation)) // 3-3. 방금 수정한 쿼리 재요청하기
+//   //       }
+//   //     }
+//   //   }
+//   // })
+
+//   // // **** 이미지 업로드
+//   // const uploadLink = createUploadLink({
+//   //   // http -> https 로 바뀌어야 한다
+//   //   uri: 'https://backendonline.codebootcamp.co.kr/graphql',
+//   //   headers: { Authorization: `Bearer ${accessToken}` },
+//   //   credentials: 'include',
+//   // })
+
+//   // const client = new ApolloClient({
+//   //   link: ApolloLink.from([errorLink, uploadLink as unknown as ApolloLink]),
+//   //   // cache: new InMemoryCache(), // Aplio/client의 global State가 저장되는 곳 : Apollo-Cache
+//   //   cache: GLOBAL_STATE, // 페이지 전환(_app.tsx 리렌더)되어도, 캐시 유지
+//   //   connectToDevTools: true,
+//   // })
+
+//   // prettier-ignore
+//   return (
+//     <ApolloProvider client={client}>
+//       {props.children}
+//     </ApolloProvider>
+//   )
+// }
