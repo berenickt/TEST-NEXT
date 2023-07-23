@@ -2,6 +2,7 @@ import { RecoilRoot } from 'recoil'
 import { AppProps } from 'next/app'
 import { Global } from '@emotion/react'
 import { createContext } from 'react'
+import React from 'react'
 
 import Layout from '@/components/common/layout'
 import { useDarkMode } from '@/common/hooks/useDarkMode'
